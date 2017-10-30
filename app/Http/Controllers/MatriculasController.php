@@ -15,9 +15,12 @@ class MatriculasController extends Controller
         header('Access-Control-Allow-Credentials: true');  
         
         $db = app('db');
-        $results = $db->select("SELECT *
-                                FROM bdrutano
-                                where knumerut=".$rut);
+        $results = $db->select("SELECT b.*, u.NOMBRE
+                                FROM bdrutano b, universidades u
+                                where knumerut=".$rut."
+                                AND CODIGO_U=CODIGO_PROJECT    
+                                ORDER BY ANHOPROC ASC"
+                                );
         
 //        return response()->json([
 //            "contador" => count($results),
